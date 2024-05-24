@@ -9,7 +9,7 @@ import Testimonials from "./testimonials/Testimonials";
 
 const Home = () => {
     return (
-        <div className="px-4">
+        <div>
             <Helmet>
                 <title>
                     Bistro Boss
