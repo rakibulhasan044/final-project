@@ -2,13 +2,18 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../hooks/useCart";
+
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart()
 
   const handleLogOut = () => {
     logOut()
       .then(() => {
+
         Swal.fire({
           title: "Custom animation with Animate.css",
           showClass: {
@@ -61,6 +66,13 @@ const Navbar = () => {
       <li>
         <Link to="/secret">Secret</Link>
       </li>
+      <li>
+        <Link to='/dashboard/cart' className="btn btn-sm">
+          <FaShoppingCart/>
+  <div className="badge badge-secondary">+{cart.length}</div>
+
+        </Link>
+      </li>
       {user ? (
         <>
           <button onClick={handleLogOut} className="btn btn-sm btn-active btn-ghost">
@@ -106,7 +118,7 @@ const Navbar = () => {
         <a className="btn btn-ghost text-xl">Bistro Boss</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navItem}</ul>
+        <ul className="menu menu-horizontal px-1 flex gap-2">{navItem}</ul>
       </div>
       <div className="navbar-end">
         <a className="btn">Button</a>

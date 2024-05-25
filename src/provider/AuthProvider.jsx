@@ -20,7 +20,7 @@ const AuthProvider = ({children}) => {
 
     const logOut = () => {
         setLoading(true)
-        signOut(auth);
+        return signOut(auth);
     }
 
     const updateUserProfile = (name, photourl) => {

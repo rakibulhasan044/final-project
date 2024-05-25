@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
   const {
@@ -15,6 +16,8 @@ const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate()
 
+  const axiosPublic = useAxiosPublic()
+
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password)
@@ -22,8 +25,16 @@ const SignUp = () => {
         console.log(result.user);
         updateUserProfile(data.name, data.photourl)
         .then(() => {
-          console.log('profile updated');
-          reset();
+
+          const userInfo = {
+            name: data.name,
+            email: data.email
+          }
+          
+          axiosPublic.post('/users', userInfo)
+          .then(res => {
+            if(res.data.insertedId) {
+              reset();
           Swal.fire({
             position: "center",
             icon: "success",
@@ -31,6 +42,9 @@ const SignUp = () => {
             showConfirmButton: false,
             timer: 1500
           });
+            }
+          })
+          
         })
         navigate('/')
       })
@@ -133,7 +147,7 @@ const SignUp = () => {
                 />
               </div>
             </form>
-            <p><small>Already have an account?<Link to='/login'>Login here</Link></small></p>
+            <p className="p-6"><small>Already have an account?<Link to='/login'>Login here</Link></small></p>
           </div>
         </div>
       </div>
