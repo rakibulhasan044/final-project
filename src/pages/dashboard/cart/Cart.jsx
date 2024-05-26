@@ -21,7 +21,7 @@ const Cart = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`${import.meta.env.VITE_API_URL}/carts/${id}`)
+          .delete(`/carts/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
                 refetch();
