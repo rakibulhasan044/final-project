@@ -115,6 +115,7 @@ const Login = () => {
                   type="text"
                   placeholder="type the captcha"
                   name="captcha"
+                  disabled
                   className="input input-bordered"
                   required
                 />

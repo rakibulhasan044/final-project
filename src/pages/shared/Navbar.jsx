@@ -15,7 +15,7 @@ const Navbar = () => {
       .then(() => {
 
         Swal.fire({
-          title: "Custom animation with Animate.css",
+          title: "Successfully log out",
           showClass: {
             popup: `
             animate__animated

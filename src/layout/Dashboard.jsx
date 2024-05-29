@@ -2,12 +2,14 @@ import { FaCalendar, FaEnvelope, FaHome, FaList, FaListAlt, FaShoppingCart, FaUs
 import { NavLink, Outlet } from "react-router-dom";
 import { MdBook, MdMenuBook, MdReviews } from "react-icons/md";
 import useAdmin from "../hooks/useAdmin";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
+  const [cart] = useCart()
   return (
     <div className="flex">
-      <div className="w-64 min-h-screen bg-orange-400">
+      <div className="w-64 min-h-screen bg-orange-600">
         <ul className="menu">
           {
             isAdmin ? <>
@@ -49,15 +51,15 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/reservation">
+            <NavLink to="/dashboard/history">
               <FaCalendar />
-              Reservation
+              Payment History
             </NavLink>
           </li>
           <li>
             <NavLink to="/dashboard/cart">
               <FaShoppingCart />
-              My Cart
+              My Cart({cart.length})
             </NavLink>
           </li>
           <li>
@@ -67,9 +69,9 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/myBooking">
+            <NavLink to="/dashboard/paymentHistory">
               <FaListAlt />
-              My Booking
+              Payment real History
             </NavLink>
           </li>
             </>
